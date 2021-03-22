@@ -1,0 +1,18 @@
+{
+    "type": "project",
+    "authors": [
+        {
+            "name": "Igor Nikolic",
+            "email": "igorn995@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/",
+            "Core\\": "core/"
+        },
+        "files": [
+          "bootstrap/helpers.php"
+        ]
+    }
+}
