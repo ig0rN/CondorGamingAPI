@@ -9,7 +9,7 @@ class Request
      *
      * @return string
      */
-    public static function uri()
+    public static function uri(): string
     {
         $url = trim($_SERVER['REQUEST_URI'], '/');
 
@@ -21,7 +21,7 @@ class Request
      *
      * @return string
      */
-    public static function method()
+    public static function method(): string
     {
         return $_SERVER['REQUEST_METHOD'];
     }

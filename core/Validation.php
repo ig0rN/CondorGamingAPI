@@ -4,23 +4,17 @@ namespace Core;
 
 abstract class Validation
 {
-    /**
-     * @var bool
-     */
-    private $passed = false;
-    /**
-     * @var array
-     */
-    private $errors = array();
+    private bool $passed = false;
+    private array $errors = array();
 
     /**
      * Except mostly form data which need to be validated
      *
      * @param $variable
      * @param array $fields
-     * @return $this
+     * @return Validation
      */
-    protected function check($variable, array $fields = array())
+    protected function check($variable, array $fields = array()): Validation
     {
         foreach ($fields as $field => $rules) {
 
@@ -58,33 +52,17 @@ abstract class Validation
         return $this;
     }
 
-    /**
-     * Add error to error array
-     *
-     * @param $field
-     * @param $error
-     */
-    private function addError($field, $error)
+    private function addError(string $field, string $error): void
     {
       $this->errors[$field] = $error;
     }
 
-    /**
-     * Retrieve errors
-     *
-     * @return array
-     */
-    public function errors()
+    public function errors(): array
     {
       return $this->errors;
     }
 
-    /**
-     * Check does validation passed or not
-     *
-     * @return bool
-     */
-    public function passed()
+    public function passed(): bool
     {
       return $this->passed;
     }

@@ -9,7 +9,7 @@ class App
      *
      * @var array
      */
-    protected static $registry;
+    protected static array $registry;
 
     /**
      * Register param
@@ -17,7 +17,7 @@ class App
      * @param $key
      * @param $value
      */
-    public static function bind ($key, $value)
+    public static function bind($key, $value): void
     {
         self::$registry[$key] = $value;
     }
@@ -28,7 +28,7 @@ class App
      * @param $key
      * @return null | mixed
      */
-    public static function get ($key)
+    public static function get($key)
     {
         if (array_key_exists($key, self::$registry)) {
             return self::$registry[$key];

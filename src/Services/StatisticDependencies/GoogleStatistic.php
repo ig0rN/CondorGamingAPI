@@ -2,7 +2,9 @@
 
 namespace Src\Services\StatisticDependencies;
 
-// in this service we could implement as much API methods as we want if that method is connected with Google
+/**
+ * in this service we could implement as much API methods as we want if that method is connected with Google
+ */
 class GoogleStatistic implements StatisticInterface
 {
 //    /**

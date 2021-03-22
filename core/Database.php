@@ -2,28 +2,16 @@
 
 namespace Core;
 
-use PDO, PDOException;
+use PDO;
+use PDOException;
+use PDOStatement;
 
 class Database
 {
-    /**
-     * @var PDO
-     */
-    private $pdo;
-    /**
-     * @var PDO statement
-     */
-    private $stmt;
-    /**
-     * @var string
-     */
-    private $error;
-    /**
-     * Class instance
-     *
-     * @var Database
-     */
-    private static $instance;
+    private PDO $pdo;
+    private PDOStatement $stmt;
+    private string $error;
+    private static Database $instance;
 
     /**
      * Connect to database
@@ -61,7 +49,7 @@ class Database
      * @param string $password
      * @return Database
      */
-    public static function getInstance(string $type, string $host, string $dbname, string $username, string $password)
+    public static function getInstance(string $type, string $host, string $dbname, string $username, string $password): Database
     {
         if (self::$instance === null) {
             self::$instance = new self($type, $host, $dbname, $username, $password);
@@ -73,9 +61,10 @@ class Database
      * Make prepared statement
      *
      * @param $sql
-     * @return $this
+     * @return Database
      */
-    public function query($sql){
+    public function query($sql): Database
+    {
         $this->stmt = $this->pdo->prepare($sql);
 
         return $this;
@@ -87,16 +76,17 @@ class Database
      * @param $param
      * @param $value
      * @param null $type
-     * @return $this
+     * @return Database
      */
-    public function bind($param, $value, $type = null){
+    public function bind($param, $value, $type = null): Database
+    {
         if(is_null($type)){
             switch(true){
                 case is_int($value):
                     $type = PDO::PARAM_INT;
                     break;
                 case is_bool($value):
-                    $type = PDO::PARAM_BOLL;
+                    $type = PDO::PARAM_BOOL;
                     break;
                 case is_null($value):
                     $type = PDO::PARAM_NULL;
@@ -116,7 +106,8 @@ class Database
      *
      * @return mixed
      */
-    public function execute(){
+    public function execute()
+    {
         return $this->stmt->execute();
     }
 
@@ -124,7 +115,8 @@ class Database
      * @param string $className
      * @return null | array [objects]
      */
-    public function resultSet(string $className){
+    public function resultSet(string $className)
+    {
         $this->setFetchMode($className);
         $this->execute();
         return $this->stmt->fetchAll();
@@ -134,25 +126,18 @@ class Database
      * @param string $className
      * @return null | object
      */
-    public function single(string $className){
+    public function single(string $className)
+    {
         $this->setFetchMode($className);
         $this->execute();
         return $this->stmt->fetch();
     }
 
-    /**
-     * @return integer
-     */
-    public function rowCount(){
+    public function rowCount(): int
+    {
         return $this->stmt->rowCount();
     }
-
-    /**
-     * Set PDO fetch mode into specific class
-     *
-     * @param string $className
-     */
-    private function setFetchMode(string $className)
+    private function setFetchMode(string $className): void
     {
         $this->stmt->setFetchMode(PDO::FETCH_CLASS, $className);
     }

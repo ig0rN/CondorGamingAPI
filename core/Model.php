@@ -4,13 +4,10 @@ namespace Core;
 
 abstract class Model
 {
-    /**
-     * @var string
-     */
-    private $className;
+    private false|string $className;
 
-    protected $table = '';
-    protected $fillable = [];
+    protected string $table = '';
+    protected array $fillable = [];
 
     /**
      * Model constructor.
@@ -73,7 +70,7 @@ abstract class Model
      * @return bool
      * @throws \Exception
      */
-    public static function create(array $data)
+    public static function create(array $data): bool
     {
         $instance = new static();
 
@@ -103,9 +100,9 @@ abstract class Model
      * Update data in database
      *
      * @param array $data
-     * @return mixed
+     * @return bool
      */
-    public function update(array $data = [])
+    public function update(array $data = []): bool
     {
         if (!empty($data)) {
             foreach ($this->fillable as $field) {
@@ -137,7 +134,7 @@ abstract class Model
      *
      * @return bool
      */
-    public function delete()
+    public function delete(): bool
     {
         return App::get('db')->query("
             DELETE FROM {$this->table} WHERE id = {$this->id}

@@ -2,7 +2,8 @@
 
 namespace Core;
 
-use Core\Exceptions\{MethodNotFoundException, RouteNotFoundException};
+use Core\Exceptions\MethodNotFoundException;
+use Core\Exceptions\RouteNotFoundException;
 
 class Router
 {
@@ -11,7 +12,7 @@ class Router
      *
      * @var array
      */
-    public $routes = array(
+    public array $routes = array(
         'GET' => array(),
         'POST' => array()
     );
@@ -23,7 +24,7 @@ class Router
      * @param string $file
      * @return Router
      */
-    public static function load(string $file)
+    public static function load(string $file): Router
     {
         $router = new self();
 
@@ -38,7 +39,7 @@ class Router
      * @param $uri
      * @param $controller
      */
-    public function get($uri, $controller)
+    public function get(string $uri, string $controller): void
     {
         $this->routes['GET'][$uri] = $controller;
     }
@@ -49,7 +50,7 @@ class Router
      * @param $uri
      * @param $controller
      */
-    public function post($uri, $controller)
+    public function post(string $uri, string $controller): void
     {
         $this->routes['POST'][$uri] = $controller;
     }
@@ -63,7 +64,7 @@ class Router
      * @throws MethodNotFoundException
      * @throws RouteNotFoundException
      */
-    public function direct($uri, $requestType)
+    public function direct(string $uri, $requestType)
     {
         if (array_key_exists($uri, $this->routes[$requestType])) {
 
@@ -84,7 +85,7 @@ class Router
      * @return mixed
      * @throws MethodNotFoundException
      */
-    protected function callAction($controller, $action)
+    protected function callAction(string $controller, string $action)
     {
         $controller = '\\Src\\Controllers\\' . $controller;
 

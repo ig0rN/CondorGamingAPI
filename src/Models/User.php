@@ -6,6 +6,6 @@ use Core\Model;
 
 class User extends Model
 {
-    protected $table = 'admin_users';
-    protected $fillable = ['username', 'password'];
+    protected string $table = 'admin_users';
+    protected array $fillable = ['username', 'password'];
 }

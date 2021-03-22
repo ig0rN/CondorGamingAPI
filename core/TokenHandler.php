@@ -6,11 +6,7 @@ class TokenHandler
 {
     private string $method;
 
-    /**
-     * AccessDenied constructor.
-     * ideal solution is to pass Request $request from Symfony
-     * @param string $method
-     */
+     // ideal solution is to pass Request $request from Symfony
     public function __construct(string $method)
     {
         $this->method = strtoupper($method);

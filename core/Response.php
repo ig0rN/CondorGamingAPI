@@ -8,12 +8,6 @@ abstract class Response
     protected array $data;
     protected int $statusCode;
 
-    /**
-     * Response constructor.
-     * @param string $message
-     * @param array $data
-     * @param int $statusCode
-     */
     public function __construct(string $message = '', array $data = [], int $statusCode = 200)
     {
         $this->message      = $message;
