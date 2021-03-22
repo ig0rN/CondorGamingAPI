@@ -27,7 +27,7 @@ class Router
     {
         $router = new self();
 
-        require $file;
+        require_once $file;
 
         return $router;
     }

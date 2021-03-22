@@ -2,7 +2,7 @@
 
 namespace Core\Exceptions;
 
-class RouteNotFoundException extends Exception
+class RouteNotFoundException extends \Exception
 {
     /**
      * RouteNotFoundException constructor.
