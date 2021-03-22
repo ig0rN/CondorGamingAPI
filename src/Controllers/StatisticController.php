@@ -2,7 +2,7 @@
 
 namespace Src\Controllers;
 
-use Core\JsonResponse;
+use Core\Responses\XmlResponse;
 
 class StatisticController
 {
@@ -11,6 +11,6 @@ class StatisticController
      */
     public function getStatistic()
     {
-        return new JsonResponse('Success', ['message' => 'test test'], 400);
+        return new XmlResponse('Success', ['message' => 'test test'], 400);
     }
 }

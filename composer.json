@@ -14,5 +14,9 @@
         "files": [
           "bootstrap/helpers.php"
         ]
-    }
+    },
+  "require": {
+    "ext-json": "*",
+    "ext-simplexml": "*"
+  }
 }
